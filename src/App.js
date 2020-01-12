@@ -67,8 +67,9 @@ class App extends Component {
     const options = {
       headers: { 'content-type': 'multipart/form-data' }
     };
-    const response = await axios.post('/upload', data, options)
-    console.log('we done did it fellas', response.data)
+    await axios.post('/upload', data, options)
+    alert('image uploaded!');
+    window.location.reload();
   }
 
   handleFileChange(e) {
@@ -97,11 +98,9 @@ class App extends Component {
   }
 
   filterPics() {
-    console.log('now here')
     const { filterVal } = this.state;
     let filteredPictures;
     if (filterVal === "null") {
-      console.log('resetting pics ')
       filteredPictures = this.state.pictures;
     } else {
       filteredPictures = [...this.state.pictures].filter(picture => picture.tags.includes(filterVal));
@@ -110,8 +109,6 @@ class App extends Component {
   }
 
   updateFilter(e) {
-    console.log('we in here')
-    console.log(e.target.value);
     this.setState({ filterVal: e.target.value }, this.filterPics);
   }
 
@@ -132,20 +129,24 @@ class App extends Component {
           <input type="file" onChange={this.handleFileChange} />
           <button type="submit">Submit!</button>
           <p>Select tags for your image</p>
-          {Object.keys(this.state.tags).map((tag, i) => {
-            return (
-              <div key={i}>
-                <span>{tag}</span>
-                <input
-                  type="checkbox"
-                  name={tag}
-                  checked={this.state.tags[tag]}
-                  onChange={() => this.toggleCheckbox(tag)}
-                />
-              </div>
-            )
-          })}
+          <div className="tags-container">
+            {Object.keys(this.state.tags).map((tag, i) => {
+              return (
+                <div key={i} className="btn-group-toggle tag" >
+                  <label className={`btn btn-secondary ${this.state.tags[tag] ? 'active': ''}`}>
+                    <input
+                      type="checkbox"
+                      name={tag}
+                      checked={this.state.tags[tag]}
+                      onChange={() => this.toggleCheckbox(tag)}
+                    /> {tag}
+                  </label>
+                </div>
+              )
+            })}
+          </div>
         </form>
+        <hr/>
         <h1>Gallery</h1>
         <p>Sort By:</p>
         <select name="tag" onChange={this.updateFilter}>
