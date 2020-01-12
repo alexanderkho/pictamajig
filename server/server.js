@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const path = require('path');
 const cors = require('cors');
 const multer = require('multer'); 
+const db = require('../db/index.js');
+
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -38,8 +40,28 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/upload', upload.single('file'), async (req, res) => {
+  await db.savePicture(req.file.path, JSON.parse(req.body.tags), req.body.username);
   res.send('yeah mate');
 });
+
+app.get('/pictures', async (req, res) => {
+  const pictures = await db.getPictures()
+  res.json(pictures);
+});
+
+app.get('*/storage/:url', async (req, res) => {
+  res.sendFile(path.join(__dirname, '../storage/', req.params.url));
+});
+
+app.put('/:image_id', async (req, res) => {
+  try {
+    await db.likePicture(req.params.image_id);
+    res.sendStatus(202);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(404);
+  }
+})
 
 app.listen(process.env.PORT || 8080);
