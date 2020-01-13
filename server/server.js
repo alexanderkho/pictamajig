@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require('cors');
 const multer = require('multer'); 
 const db = require('../db/index.js');
+require('dotenv').config();
 
 const app = express();
 
