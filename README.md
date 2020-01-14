@@ -1,5 +1,5 @@
 # About picta-majig
-picta-majig is a photo-sharing service that allows users to upload and search images. Think "instagram-lite" :)
+picta-majig is a photo-sharing service that allows users to upload and search images. Think "instagram-lite-lite" :)
 
 This is a "minimum-viable-product" project that I completed in one day during my time as a student at Hack Reactor @ Galvanize in Boulder, CO. There are numerous missing features (user-login & authentication, capability to flag and delete images, etc.) that I'd like to add in the future.
 
