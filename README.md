@@ -1,6 +1,8 @@
 # About picta-majig
 picta-majig is a photo-sharing service that allows users to upload and search images. Think "instagram-lite-lite" :)
 
+<img src="https://i.ibb.co/NrLJ5nP/pictamajig.jpg" alt="Pictamajig" width="60%" />
+
 This is a "minimum-viable-product" project that I completed in a single day during my time as a student at Hack Reactor @ Galvanize in Boulder, CO. There are numerous missing features (user-login & authentication, daily upload limits, capability to report and delete images, etc.) that I'd like to add in the future.
 
 The front-end was built with Create React App and Bootstrap, and the backend/API was built with Node, Express and MongoDB. I also used Multer to handle image uploads on the server-side. 
